@@ -26,6 +26,16 @@ export function ProgramSection({
             {program.abbr}
           </p>
           <p>{program.description}</p>
+          {program.specializations?.length ? (
+            <div className="program-specializations">
+              <p className="utility-label">2-in-1 specializations</p>
+              <ul className="program-specializations__list">
+                {program.specializations.map((track) => (
+                  <li key={track}>{track}</li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
           <a
             className="text-link"
             href="https://www.feutech.edu.ph/academics/ccsma"

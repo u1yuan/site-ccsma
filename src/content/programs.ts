@@ -7,6 +7,8 @@ export interface Program {
   description: string;
   status: Extract<ContentStatus, "official">;
   flora: "crystal" | "mushroom" | "blossom" | "fern" | "berries" | "petals";
+  // Optional "2-in-1" specialization tracks offered within the degree.
+  specializations?: string[];
 }
 
 export const programsSource: SourceAttribution = {
@@ -23,6 +25,7 @@ export const programs: Program[] = [
       "Includes the study of computing concepts and theories, algorithmic foundations, and new developments in computing. The program prepares students to design and create algorithmically complex software and develop new and effective algorithms for solving computing problems. Graduates of this program can expect a successful and rewarding career in specification design, coding, and software testing. It also focuses on software engineering, database, and large-scale software.",
     status: "official",
     flora: "crystal",
+    specializations: ["Data Science", "Software Engineering"],
   },
   {
     id: "information-technology",

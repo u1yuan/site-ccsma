@@ -565,6 +565,29 @@ button:focus-visible {
   letter-spacing: 0.2em;
 }
 
+.program-specializations {
+  margin-top: 1.6rem;
+}
+
+.program-specializations__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 0.7rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.program-specializations__list li {
+  border: 1px solid color-mix(in srgb, var(--bio-400) 45%, transparent);
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  color: var(--sprite-100);
+  font-family: var(--font-jetbrains-mono), Consolas, monospace;
+  font-size: 0.78rem;
+  background: color-mix(in srgb, var(--bio-400) 8%, transparent);
+}
+
 .program-section__flora {
   position: relative;
 }
