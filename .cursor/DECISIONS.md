@@ -4,6 +4,22 @@ Record significant technical and product decisions here so agents and humans sha
 
 ---
 
+## [2026-08-24] — Adviser round: placeholders-first media, org detail routes, Paraverse landing
+
+- **Context:** Doc Hazel asked for logos, org pages, hover/click activity pictures, director photos, a Paraverse-like landing, a coherent type scale, and fuller SADU surfacing — while the human is time-boxed and will supply images later.
+- **Decision:** Build the full structure on one branch (`feat/adviser-round`) with every image slot showing its fallback. `src/content/media.ts` and accreditation `src` fields start empty so no missing file 404s. Org logos use `/logos/orgs/` and fall back to the existing monogram. Activity and director photos use a themed "Photos coming soon" panel. GlowTree lights and SADU development-program items are keyboard-openable dialogs (Escape to close); hover is enhancement only. Each org gets a static `/organizations/<id>/` route. The landing keeps existing copy and the woodsprite canvas but uses a calmer Paraverse layout. Type sizes go through `--font-size-*` tokens. No new dependencies, no invented names or extra SADO facts.
+- **Consequences:** Real images light up by editing the manifest and dropping files in `public/`. Visual e2e snapshots will need a human review after the landing change and must not be auto-updated in this pass.
+
+---
+
+## [2026-08-17] — Organization copy provenance: compiled summaries, hand-added logos
+
+- **Context:** The five CCSMA organizations (ACM, AITS, JPCS, PRISM, SCC) had no verbatim official descriptions on the CCSMA or SADU pages, but public org and campus sources do describe them. Shipping "Content coming soon" forever, inventing official-sounding copy, and scraping logos were all off the table.
+- **Decision:** Author compiled community descriptions from those public sources and tag every org `status: "summary"` (the same provenance value SADU mantras already use). Each card shows a visible but quiet **Community description** label; if a later human marks an org `"official"`, that label drops. Logo files are added by hand under `public/logos/` only with the orgs' permission — no scraping, no generated marks pretending to be official. Until a `logo` path is set, the card renders a static themed monogram. SCC remains the centered `role: "connector"` linking body. SCC's motto "Serve. Lead. Excel." is shared FEU institutional language with SADU and both surfaces keep it.
+- **Consequences:** Organization copy must not be presented as FEU's official verbatim text. Footer source-attribution links stay on the roster/academics pages they already cite. Placeholders remain a supported `status` for any future empty block, but none of the five orgs use it now.
+
+---
+
 ## [2026-08-16] — Campus micro-accents and the living data vine
 
 - **Context:** The Pandora-inspired palette needed a restrained institutional anchor, and the three-route descent needed one recognizable interaction that would remain coherent across otherwise distinct compositions.

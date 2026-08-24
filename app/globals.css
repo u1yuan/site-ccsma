@@ -15,6 +15,11 @@
   --campus-gold: #c8a84e;
   --page-gutter: clamp(1.25rem, 4vw, 4.5rem);
   --content-width: 88rem;
+  --font-size-hero: clamp(2.6rem, 8vw, 6.2rem);
+  --font-size-section: clamp(1.85rem, 3.8vw, 3.25rem);
+  --font-size-card: clamp(1rem, 1.5vw, 1.28rem);
+  --font-size-display: clamp(2.1rem, 4.6vw, 4.4rem);
+  --font-size-mantra: clamp(1.25rem, 2.6vw, 2.05rem);
 }
 
 * {
@@ -252,7 +257,7 @@ button:focus-visible {
   max-width: 12ch;
   margin-top: 1rem;
   font-family: var(--font-poppins), Arial, sans-serif;
-  font-size: clamp(3.2rem, 7vw, 7.4rem);
+  font-size: var(--font-size-hero);
   font-weight: 600;
   line-height: 0.92;
   letter-spacing: -0.052em;
@@ -439,10 +444,13 @@ button:focus-visible {
 
 .story-section h2,
 .mantra-section h2,
-.contact-section h2 {
+.contact-section h2,
+.org-detail h1,
+.org-detail h2,
+.directors-gallery h2 {
   margin-top: 0.7rem;
   font-family: var(--font-poppins), Arial, sans-serif;
-  font-size: clamp(2.1rem, 4.2vw, 4.7rem);
+  font-size: var(--font-size-section);
   font-weight: 600;
   line-height: 1.06;
   letter-spacing: -0.035em;
@@ -703,7 +711,7 @@ button:focus-visible {
 .org-card__abbr {
   margin-block: 1.25rem 0.65rem;
   font-family: var(--font-poppins), Arial, sans-serif;
-  font-size: clamp(2.7rem, 5.5vw, 5.8rem);
+  font-size: var(--font-size-display);
   font-weight: 600;
   line-height: 1;
   letter-spacing: -0.04em;
@@ -712,7 +720,7 @@ button:focus-visible {
 .org-card h2 {
   max-width: 28ch;
   color: color-mix(in srgb, var(--ink-100) 74%, transparent);
-  font-size: clamp(1rem, 1.7vw, 1.35rem);
+  font-size: var(--font-size-card);
   font-weight: 400;
   line-height: 1.5;
 }
@@ -731,6 +739,88 @@ button:focus-visible {
 
 .placeholder-state span {
   color: var(--campus-gold);
+}
+
+.org-card__mark {
+  display: grid;
+  width: 4.75rem;
+  height: 4.75rem;
+  margin-bottom: 1.75rem;
+  place-items: center;
+}
+
+.org-card__logo {
+  max-width: 4.75rem;
+  max-height: 4.75rem;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.org-card__monogram {
+  display: grid;
+  width: 4.75rem;
+  height: 4.75rem;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--bio-400) 58%, transparent);
+  border-radius: 50%;
+  background: var(--night-950);
+  box-shadow:
+    inset 0 0 1.1rem color-mix(in srgb, var(--navi-600) 35%, transparent),
+    0 0 1.15rem color-mix(in srgb, var(--bio-400) 32%, transparent);
+  color: var(--sprite-100);
+  font-family: var(--font-poppins), Arial, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.org-card__provenance {
+  margin-top: 0.55rem;
+}
+
+.org-card__body > p {
+  margin-top: 1.5rem;
+  color: color-mix(in srgb, var(--ink-100) 76%, transparent);
+  line-height: 1.75;
+}
+
+.org-card__field {
+  margin-top: 1.35rem;
+}
+
+.org-card__field p:last-child {
+  margin-top: 0.45rem;
+  color: color-mix(in srgb, var(--ink-100) 70%, transparent);
+  line-height: 1.7;
+}
+
+.org-card__values {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 1rem;
+  margin-top: 0.55rem;
+  padding: 0;
+  list-style: none;
+  color: var(--sprite-100);
+  font-family: var(--font-jetbrains-mono), Consolas, monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+}
+
+.org-card__links {
+  display: grid;
+  gap: 0.45rem;
+  margin-top: 1.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.org-card__links a {
+  color: var(--bio-400);
+  font-family: var(--font-jetbrains-mono), Consolas, monospace;
+  font-size: 0.76rem;
+  text-decoration: none;
 }
 
 .sadu-narrative {
@@ -853,7 +943,7 @@ button:focus-visible {
 .mantra-root h3 {
   margin-top: 0.8rem;
   font-family: var(--font-poppins), Arial, sans-serif;
-  font-size: clamp(2rem, 4vw, 3.8rem);
+  font-size: var(--font-size-mantra);
   font-weight: 600;
 }
 
@@ -1111,7 +1201,7 @@ button:focus-visible {
   }
 
   .route-hero h1 {
-    font-size: clamp(2.7rem, 15vw, 4.6rem);
+    font-size: var(--font-size-hero);
   }
 
   .route-hero__visual {
@@ -1129,8 +1219,11 @@ button:focus-visible {
 
   .story-section h2,
   .mantra-section h2,
-  .contact-section h2 {
-    font-size: clamp(2rem, 10vw, 3.1rem);
+  .contact-section h2,
+  .org-detail h1,
+  .org-detail h2,
+  .directors-gallery h2 {
+    font-size: var(--font-size-section);
   }
 
   .program-section__grid {
@@ -1219,7 +1312,7 @@ button:focus-visible {
 
 @media (min-width: 360px) and (max-width: 680px) {
   .route-hero--programs .route-hero__content {
-    height: 29rem;
+    min-height: 0;
   }
 
   .route-hero--programs .route-index {
@@ -1229,6 +1322,179 @@ button:focus-visible {
     left: 0;
     margin-top: 0;
   }
+}
+
+.route-hero--paraverse {
+  align-items: start;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.route-hero--paraverse .route-hero__visual {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  min-height: 100%;
+  opacity: 0.48;
+}
+
+.route-hero--paraverse .route-hero__content {
+  z-index: 2;
+  max-width: 46rem;
+}
+
+.accreditation-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 2rem;
+  padding: 0;
+  list-style: none;
+}
+
+.accreditation-strip__chip,
+.accreditation-strip__logo {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.1rem;
+  border: 1px solid color-mix(in srgb, var(--navi-600) 70%, transparent);
+  border-radius: 999px;
+  padding: 0.35rem 0.8rem;
+  background: color-mix(in srgb, var(--night-900) 70%, transparent);
+  color: var(--sprite-100);
+  font-family: var(--font-jetbrains-mono), Consolas, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.accreditation-strip__logo {
+  max-height: 2.1rem;
+  width: auto;
+  object-fit: contain;
+}
+
+.org-card__identity {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.org-card__identity:focus-visible {
+  border-radius: 0.4rem;
+}
+
+.glow-tree__lights {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.glow-tree__lights li {
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.glow-tree__hotspot {
+  display: block;
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--bio-400) 35%, transparent);
+  box-shadow: 0 0 0.9rem color-mix(in srgb, var(--bio-400) 45%, transparent);
+}
+
+.media-reveal__trigger {
+  display: inline;
+  border: 0;
+  background: none;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.media-dialog {
+  position: fixed;
+  z-index: 80;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  background: color-mix(in srgb, var(--night-950) 72%, transparent);
+}
+
+.media-dialog__panel {
+  width: min(100%, 36rem);
+  border: 1px solid color-mix(in srgb, var(--bio-400) 40%, transparent);
+  padding: 1.5rem;
+  background: var(--night-900);
+  box-shadow: 0 0 2.4rem color-mix(in srgb, var(--bio-400) 16%, transparent);
+}
+
+.media-dialog__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.media-dialog__header h2 {
+  font-family: var(--font-poppins), Arial, sans-serif;
+  font-size: var(--font-size-card);
+}
+
+.media-dialog__close,
+.org-detail__back {
+  color: var(--bio-400);
+  font-family: var(--font-jetbrains-mono), Consolas, monospace;
+  font-size: 0.76rem;
+}
+
+.media-placeholder {
+  display: grid;
+  min-height: 8rem;
+  place-items: center;
+  gap: 0.6rem;
+  border: 1px dashed color-mix(in srgb, var(--bio-400) 46%, transparent);
+  padding: 1.5rem;
+  color: var(--sprite-100);
+  font-family: var(--font-jetbrains-mono), Consolas, monospace;
+  font-size: 0.75rem;
+  background: color-mix(in srgb, var(--navi-600) 12%, transparent);
+}
+
+.media-gallery {
+  display: grid;
+  gap: 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.media-gallery img,
+.directors-gallery img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.org-detail {
+  width: min(100%, 48rem);
+  margin-inline: auto;
+  padding: 6rem var(--page-gutter) 8rem;
+}
+
+.org-detail__back {
+  display: inline-block;
+  margin-bottom: 2.5rem;
+}
+
+.org-detail__gallery,
+.directors-gallery {
+  margin-top: 3.5rem;
 }
 
 @media (prefers-reduced-motion: reduce) {

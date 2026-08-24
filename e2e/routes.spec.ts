@@ -100,11 +100,25 @@ test("keyboard navigation exposes the skip link and visible focus", async ({
   expect(focusedOutline).toBe(true);
 });
 
-test("organization placeholders and SADU details remain exact", async ({
+test("organization descriptions and SADU details remain exact", async ({
   page,
 }) => {
   await page.goto("/organizations/");
-  await expect(page.getByText("Content coming soon")).toHaveCount(5);
+  await expect(page.getByText("Content coming soon")).toHaveCount(0);
+
+  const distinctivePhrases = [
+    "Philippines' second internationally accredited ACM student chapter",
+    "Established in 2014",
+    "one of the oldest student organizations",
+    "official academic organization of the Multimedia Arts Department",
+    "highest governing student body",
+  ];
+
+  for (const phrase of distinctivePhrases) {
+    const copy = page.getByText(phrase);
+    await copy.scrollIntoViewIfNeeded();
+    await expect(copy).toBeVisible();
+  }
 
   await page.goto("/student-activities/");
   await expect(page.getByText("Room 1501", { exact: true })).toBeVisible();
@@ -124,6 +138,59 @@ test("organization placeholders and SADU details remain exact", async ({
       exact: true,
     }),
   ).toBeVisible();
+});
+
+test("organization detail pages render from the map and stay accessible", async ({
+  page,
+}) => {
+  await page.goto("/organizations/");
+  await page.locator("#acm").scrollIntoViewIfNeeded();
+  const cardLink = page
+    .getByRole("link", { name: /Association for Computing Machinery/ })
+    .first();
+  await cardLink.click();
+  await expect(page).toHaveURL(/\/organizations\/acm\/?$/);
+  await expect(
+    page.getByRole("heading", {
+      level: 1,
+      name: "Association for Computing Machinery — FEU Tech Student Chapter",
+    }),
+  ).toBeVisible();
+  await expect(
+    page.getByText(
+      "Philippines' second internationally accredited ACM student chapter",
+    ),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Back to all organizations" }),
+  ).toBeVisible();
+
+  const results = await new AxeBuilder({ page }).analyze();
+  const critical = results.violations.filter(
+    (violation) => violation.impact === "critical",
+  );
+  expect(critical).toEqual([]);
+
+  for (const slug of ["aits", "jpcs", "prism", "scc"] as const) {
+    await page.goto(`/organizations/${slug}/`);
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+    await expect(page.getByText("Photos coming soon").first()).toBeVisible();
+  }
+});
+
+test("activity reveal opens from the keyboard and closes with Escape", async ({
+  page,
+}) => {
+  await page.goto("/organizations/");
+  const trigger = page.getByRole("button", { name: "ACM activity photos" });
+  await trigger.focus();
+  await expect(trigger).toBeFocused();
+  await page.keyboard.press("Enter");
+  const dialog = page.getByRole("dialog", { name: "ACM activity photos" });
+  await expect(dialog).toBeVisible();
+  await expect(dialog.getByText("Photos coming soon")).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(dialog).toHaveCount(0);
 });
 
 test.describe("reduced motion", () => {

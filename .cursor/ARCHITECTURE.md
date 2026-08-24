@@ -17,7 +17,7 @@ Content is static and known at build time. There is no server, database, or exte
 flowchart LR
   content["src/content/*.ts (typed data)"] --> sections["Section components"]
   sections --> scroll["Scroll orchestration (Lenis + Framer Motion useScroll)"]
-  scroll --> pages["app/page.tsx, app/organizations, app/student-activities"]
+  scroll --> pages["app/page.tsx, app/organizations, app/organizations/[slug], app/student-activities"]
   tokens["Pandora tokens (tailwind.config + CSS vars)"] --> sections
   reduced["prefers-reduced-motion"] --> scroll
 ```
@@ -32,8 +32,8 @@ Trace for a program card on `/`:
 
 ## Key Modules
 
-- `app/` — App Router routes: `page.tsx` (landing), `organizations/page.tsx`, `student-activities/page.tsx`, plus `layout.tsx` (fonts, Lenis provider, skip link, progress vine).
-- `src/content/` — typed data: `programs.ts`, `organizations.ts`, `sadu.ts`. Single source the components render. Mirrors `.cursor/CONTENT.md`.
+- `app/` — App Router routes: `page.tsx` (landing), `organizations/page.tsx`, `organizations/[slug]/page.tsx` (static `generateStaticParams` for each org id), `student-activities/page.tsx`, plus `layout.tsx` (fonts, Lenis provider, skip link, progress vine).
+- `src/content/` — typed data: `programs.ts`, `organizations.ts`, `sadu.ts`, `media.ts` (empty photo/director manifests), `accreditations.ts`. Single source the components render. Mirrors `.cursor/CONTENT.md`. Image sets are declared in the manifest, never globbed from `public/` at request time.
 - `src/components/scroll/` — reusable scroll primitives: `Bloom`, `Drift`, `Pulse`, `Section`, `ScrollProgressVine`.
 - `src/components/pandora/` — themed presentational pieces: `WoodspriteHero` (the one canvas), `GlowFlora`, `VineDivider`, `OrgCard`, `ProgramFlora`, `MantraRoots`.
 - `src/lib/motion/` — motion tokens and the `usePrefersReducedMotion` hook; the only place animation physics/easings live.

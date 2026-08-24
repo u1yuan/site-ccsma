@@ -6,7 +6,7 @@ export function OrganizationsHero() {
     <HeroFrame
       eyebrow="Connected groves / organization directory"
       title="Organizations"
-      intro="Five named student bodies form this map. Their official descriptions are still pending, so every entry is clearly marked as forthcoming."
+      intro="Five named student bodies form this map of connected groves. Each entry carries a community description compiled from public sources, not official FEU copy."
       visual={<GlowTree variant="groves" />}
     />
   );

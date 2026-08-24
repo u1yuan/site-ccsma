@@ -1,7 +1,13 @@
+import {
+  developmentProgramId,
+  programIllustrations,
+} from "@/src/content/media";
 import { sadu } from "@/src/content/sadu";
 
 import { Section } from "../scroll/Section";
+import { DirectorsGallery } from "./DirectorsGallery";
 import { MantraRoots } from "./MantraRoots";
+import { MediaReveal } from "./MediaReveal";
 
 export function SaduNarrative() {
   return (
@@ -49,9 +55,19 @@ export function SaduNarrative() {
         className="sadu-section sadu-section--right"
       >
         <ul className="signal-list">
-          {sadu.developmentPrograms.map((program) => (
-            <li key={program}>{program}</li>
-          ))}
+          {sadu.developmentPrograms.map((program) => {
+            const id = developmentProgramId(program);
+            return (
+              <li key={program}>
+                <MediaReveal
+                  title={program}
+                  items={programIllustrations[id] ?? []}
+                >
+                  {program}
+                </MediaReveal>
+              </li>
+            );
+          })}
         </ul>
       </Section>
 
@@ -69,6 +85,8 @@ export function SaduNarrative() {
       </Section>
 
       <MantraRoots />
+      <DirectorsGallery group="sadu" />
+      {/* TODO(human): supply any extra SADO office details beyond sadu.ts */}
     </div>
   );
 }

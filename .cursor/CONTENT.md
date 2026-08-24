@@ -4,15 +4,17 @@ This file is the source of truth for all copy on the site. Every block of offici
 
 ## The `PLACEHOLDER:` convention
 
-FEU Tech does not publish official descriptions for the four CCSMA-affiliated RSOs (ACM, AITS, JPCS, PRISM) or the Student Coordinating Council on the CCSMA or SADU pages. Until the organizations or SADU supply real copy, their entries are placeholders.
+Any content block still tagged `status: "placeholder"` in `src/content/` must render a visible "Content coming soon" note rather than looking like real copy. A placeholder must never ship to a public URL looking official. When an org supplies officially blessed copy, replace the block, set `status: "official"`, drop the "Community description" label, and add the source to this file.
 
-Any placeholder block in `src/content/` must be wrapped in an object whose `status` field is `"placeholder"`, and the rendered site must show a visible "Content coming soon" note rather than the placeholder text. A placeholder must never ship to a public URL looking like real copy. When an org supplies official copy, replace the block, set `status: "official"`, and add the source to this file.
+The five organization entries are **not** placeholders. They carry `status: "summary"` compiled community descriptions (see below).
 
 ---
 
 ## Programs — Route `/`
 
 Source for all six: <https://www.feutech.edu.ph/academics/ccsma> — captured verbatim, order preserved.
+
+The programs hero also shows an accreditation strip (PAASCU, PICAB, Cisco, SAP, Oracle Academy, MIE, AutoCAD) as text chips until PNGs are added under `/logos/accreditation/`. Do not assert accreditations beyond those labels.
 
 ### Bachelor of Science in Computer Science (BSCS)
 
@@ -44,15 +46,73 @@ Source for all six: <https://www.feutech.edu.ph/academics/ccsma> — captured ve
 
 The four CCSMA-affiliated academic RSOs are the **Association for Computing Machinery (ACM)**, **Alliance of Information Technology Students (AITS)**, **Junior Philippine Computer Society (JPCS)**, and **PRISM — Pioneers of Relentless and Innovative Storytellers in Multimedia Arts** (the multimedia arts org). The **Student Coordinating Council (SCC)** is FEU Tech's highest governing student body.
 
-All five entries below are `PLACEHOLDER:` — no official copy exists on the source pages. Each must carry `status: "placeholder"` and a "Content coming soon" render note.
+All five entries carry `status: "summary"`: compiled from public sources (org Facebook/Instagram pages and FEU Tech pages), **not** verbatim official FEU copy. Each card shows a quiet **Community description** provenance label. Do not present this copy as FEU's official text. If a specific org is later officially blessed, set that entry to `status: "official"` and drop the label.
 
-- `PLACEHOLDER:` ACM — FEU Tech student chapter of the Association for Computing Machinery, the computing society. Await official description.
-- `PLACEHOLDER:` AITS — Alliance of Information Technology Students, the academic org for the IT program. Await official description.
-- `PLACEHOLDER:` JPCS — Junior Philippine Computer Society, FEU Tech chapter. Await official description.
-- `PLACEHOLDER:` PRISM — Pioneers of Relentless and Innovative Storytellers in Multimedia Arts, the BMMA academic org. Await official description.
-- `PLACEHOLDER:` SCC — Student Coordinating Council, the highest governing student body of FEU Tech and official representative of its students. Await official description.
+Logo files live under `/logos/orgs/` (e.g. `/logos/orgs/acm.png`) and are added by hand with the orgs' permission. Until a `logo` path is set, the card renders a themed monogram fallback. Do not scrape or invent logos.
 
-Roster source for the organization names: <https://www.feutech.edu.ph/campus_life/so> (recognized RSO list) and CCSMA program affiliation at <https://www.feutech.edu.ph/academics/ccsma>.
+Each org also has a detail route `/organizations/<id>/` (acm, aits, jpcs, prism, scc) with the same copy plus empty activity-photo and directors galleries from `src/content/media.ts`. Those manifests start empty; the UI shows a "Photos coming soon" panel until the human adds `{ src, alt }` entries. Invent no director names or titles.
+
+SCC's motto "Serve. Lead. Excel." is the same institutional language SADU already carries on `/student-activities`. Both surface it by design.
+
+### Association for Computing Machinery — FEU Tech Student Chapter (ACM)
+
+> Driven by innovation and united by passion, the FEU Tech ACM Student Chapter is a recognized student organization that stands as the mother organization of the Computer Science department of the institution and the Philippines' second internationally accredited ACM student chapter — empowering students to explore their passion for technology, spark innovation, and shape the future, one line of code at a time.
+
+Mission:
+
+> Organized and operated exclusively for educational and scientific purposes: to promote increased knowledge of and greater interest in the science, design, development, construction, languages, management, and applications of modern computing; to foster greater interest in computing and its applications; and to provide a means of communication between persons interested in computing.
+
+Vision:
+
+> To help students become future-ready and grow both academically and personally by creating platforms that develop technical skills, foster innovation, and build confidence in real-world applications — being the voice of the students, opening opportunities inside and outside the school, and growing ACM as a strong, supportive community of learners and future professionals.
+
+Values: Aptitude, Competence, Magnanimity.
+
+### Alliance of Information Technology Students (AITS)
+
+> The Alliance of Information Technology Students (AITS) is the official academic organization for IT students at the FEU Institute of Technology. Established in 2014, AITS creates an inclusive space for growth by offering technical seminars, coding challenges, and peer-led tutorials. Driven by its mission to empower student growth and its vision to foster a passion-driven IT community, the organization shapes future-ready tech leaders while upholding the university values of Fortitude, Excellence, and Uprightness.
+
+### Junior Philippine Computer Society — FEU Tech (JPCS)
+
+> The Junior Philippine Computer Society – FEU Tech (JPCS–FEU Tech) is the student chapter of the national Philippine Computer Society. Recognized as one of the oldest student organizations at the FEU Institute of Technology, it serves students in IT, Computer Science, Multimedia Arts, and Engineering, bridging classroom knowledge, industry standards, and emerging technologies through real-world networking, hackathons, and corporate partnerships.
+
+Mission:
+
+> To enhance the knowledge, leadership, and technical skills of the youth in Information and Communication Technology (ICT), providing the critical, complementary real-life experiences needed to shape students into world-class IT professionals.
+
+Vision:
+
+> To bridge academic knowledge with industry demand, building a deeply connected community where students and industry partners actively collaborate on technological advancements.
+
+### PRISM — Pioneers of Relentless and Innovative Storytellers in Multimedia Arts
+
+> The Pioneers of Relentless and Innovative Storytellers in Multimedia Arts (PRISM) is the official academic organization of the Multimedia Arts Department at the FEU Institute of Technology. Serving students majoring in animation and digital film, PRISM is a creative hub that connects freshmen and senior student-artists — helping them navigate their art journeys, master creative tools, and showcase visual storytelling.
+
+Mission:
+
+> Empowering multimedia arts students to push creative boundaries and master digital landscapes across graphic design, photography, video, and animation.
+
+Vision:
+
+> Fostering an inventive, highly collaborative artistic ecosystem.
+
+Motto: Beyond Mastery, Magnifying Artistry.
+
+### Student Coordinating Council (SCC)
+
+> The FEU Tech Student Coordinating Council (SCC) is the highest governing student body and the official student representative at the FEU Institute of Technology. Run by student leaders, it serves as the voice of the student body — bridging the gap between the university administration and the learners, and overseeing the Recognized Student Organizations on campus.
+
+Mission:
+
+> To foster a progressive campus environment where critical thinking prevails, uniting the student population to assert student rights and systematically address welfare concerns.
+
+Vision:
+
+> To build an empowered community of principled servant leaders through student-led activities, leadership initiatives, and civic service projects.
+
+Motto: Serve. Lead. Excel.
+
+Roster source for the organization names: <https://www.feutech.edu.ph/campus_life/so> (recognized RSO list) and CCSMA program affiliation at <https://www.feutech.edu.ph/academics/ccsma>. Body copy is compiled from public org and campus sources, not those two pages verbatim.
 
 ---
 
@@ -121,3 +181,5 @@ Headline (verbatim lead sentence):
 - Trunkline: (02) 8281 8888 Local 128
 - Email: sadu@feutech.edu.ph
 - Address: P. Paredes St., Sampaloc, Manila 1015
+
+The Student Development programs list items are keyboard-openable illustration triggers (`programIllustrations` in `src/content/media.ts`). GlowTree lights on the org and SADU heroes open `activityMedia` panels. Both manifests start empty. A directors gallery on this route and on each org detail page is also empty until the human supplies names, titles, and photos. Do not invent SADO details beyond this file.

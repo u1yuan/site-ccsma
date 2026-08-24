@@ -1,4 +1,18 @@
+"use client";
+
+import { activityMedia } from "@/src/content/media";
+
 import { Pulse } from "../scroll/Pulse";
+import { MediaReveal } from "./MediaReveal";
+
+const treeLights = [
+  { x: 142, y: 144, key: "acm", label: "ACM activity photos" },
+  { x: 256, y: 74, key: "aits", label: "AITS activity photos" },
+  { x: 342, y: 72, key: "jpcs", label: "JPCS activity photos" },
+  { x: 390, y: 64, key: "prism", label: "PRISM activity photos" },
+  { x: 478, y: 58, key: "scc", label: "SCC activity photos" },
+  { x: 576, y: 126, key: "sadu", label: "SADU activity photos" },
+] as const;
 
 export function GlowTree({ variant }: { variant: "groves" | "souls" }) {
   return (
@@ -20,18 +34,37 @@ export function GlowTree({ variant }: { variant: "groves" | "souls" }) {
         <path className="tree-root" d="M360 568C435 548 534 558 650 598" />
         <path className="tree-root" d="M360 565C344 585 326 598 295 611" />
         <path className="tree-root" d="M360 565C383 586 405 600 434 614" />
-        {[142, 256, 342, 390, 478, 576].map((x, index) => (
+        {treeLights.map((light, index) => (
           <circle
-            key={x}
+            key={light.key}
             className={
               index % 2 ? "tree-light tree-light--violet" : "tree-light"
             }
-            cx={x}
-            cy={[144, 74, 72, 64, 58, 126][index]}
+            cx={light.x}
+            cy={light.y}
             r={index % 3 === 0 ? 10 : 7}
           />
         ))}
       </svg>
+      <ul className="glow-tree__lights">
+        {treeLights.map((light) => (
+          <li
+            key={light.key}
+            style={{
+              left: `${(light.x / 720) * 100}%`,
+              top: `${(light.y / 620) * 100}%`,
+            }}
+          >
+            <MediaReveal
+              title={light.label}
+              items={activityMedia[light.key] ?? []}
+            >
+              <span className="sr-only">{light.label}</span>
+              <span className="glow-tree__hotspot" aria-hidden="true" />
+            </MediaReveal>
+          </li>
+        ))}
+      </ul>
     </Pulse>
   );
 }

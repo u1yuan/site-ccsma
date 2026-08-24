@@ -1,5 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
+const port = process.env.E2E_PORT ?? "4173";
+
 export default defineConfig({
   testDir: "./e2e",
   fullyParallel: true,
@@ -8,7 +10,7 @@ export default defineConfig({
   reporter: "list",
   timeout: 45_000,
   use: {
-    baseURL: "http://127.0.0.1:4173",
+    baseURL: `http://127.0.0.1:${port}`,
     trace: "retain-on-failure",
     screenshot: "only-on-failure",
   },
@@ -20,8 +22,11 @@ export default defineConfig({
   ],
   webServer: {
     command: "npm run build && node scripts/serve-static.mjs",
-    url: "http://127.0.0.1:4173",
+    url: `http://127.0.0.1:${port}`,
     reuseExistingServer: false,
     timeout: 240_000,
+    env: {
+      E2E_PORT: port,
+    },
   },
 });

@@ -49,6 +49,10 @@ Three named primitives in `src/lib/motion/`, used consistently instead of ad-hoc
 
 Easings are defined once in `src/lib/motion/tokens.ts`. All primitives read `usePrefersReducedMotion` and render their final state instantly when reduced motion is requested.
 
+Type scale tokens live on `:root` as `--font-size-hero`, `--font-size-section`, `--font-size-card`, `--font-size-display`, and `--font-size-mantra`. Headings use those tokens with `clamp()` so hero, section, card, and mantra sizes stay one family and do not overflow on mobile.
+
+**Media reveal:** GlowTree lights and SADU development-program items are focusable buttons. They open a dialog of `activityMedia` / `programIllustrations` (or a "Photos coming soon" placeholder). Keyboard: Tab to the trigger, Enter/Space to open, Escape to close. Hover may brighten a node; it is never the only way in. Dialog content is present with `prefers-reduced-motion`.
+
 ## Component Patterns
 
 - **Section** (`src/components/scroll/Section.tsx`) — the unit of scroll storytelling; a full-height block with a consistent heading treatment and a `Bloom` wrapper.
@@ -58,7 +62,7 @@ Easings are defined once in `src/lib/motion/tokens.ts`. All primitives read `use
 
 ## Per-route scroll narrative
 
-- `/` — Descent through the canopy: canvas sprite hero, then six program flora blooming in order, ending in a link toward admission.
+- `/` — Paraverse-style landing layout: large hero headline, short support line, calm starfield/bio background using existing tokens and the woodsprite canvas, accreditation chips, then six program flora blooming in order.
 - `/organizations` — The clans: four groves (ACM, AITS, JPCS, PRISM) connected by SCC rendered as the Tree of Voices that links them.
 - `/student-activities` — The Tree of Souls: vision, mission, roles, programs, then the Serve / Lead / Excel mantra as three glowing roots, ending on the contact block.
 

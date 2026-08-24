@@ -1,5 +1,6 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 
+import { MediaReveal } from "@/src/components/pandora/MediaReveal";
 import { WoodspriteHero } from "@/src/components/pandora/WoodspriteHero";
 import { Bloom } from "@/src/components/scroll/Bloom";
 import { Drift } from "@/src/components/scroll/Drift";
@@ -54,5 +55,23 @@ describe("reduced-motion fallbacks", () => {
       "static",
     );
     expect(container.querySelector("canvas")).not.toBeInTheDocument();
+  });
+
+  it("keeps MediaReveal content present under reduced motion", () => {
+    render(
+      <MediaReveal title="Visible reveal" items={[]}>
+        Open reveal
+      </MediaReveal>,
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Open reveal" }));
+    expect(
+      screen.getByRole("dialog", { name: "Visible reveal" }),
+    ).toBeVisible();
+    expect(screen.getByText("Photos coming soon")).toBeVisible();
+    expect(screen.getByRole("dialog")).toHaveAttribute(
+      "data-motion-state",
+      "static",
+    );
   });
 });
