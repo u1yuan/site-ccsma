@@ -82,10 +82,11 @@ export function MediaReveal({
     </div>
   ) : null;
 
-  // The pinned modal must escape any transformed/overflow-clipped ancestor
-  // (e.g. GlowTree's animated Pulse wrapper), so portal it to the body.
+  // Both the hover preview and the pinned modal must escape any transformed /
+  // overflow-clipped ancestor (e.g. GlowTree's animated Pulse wrapper), so they
+  // are portaled to the body and positioned relative to the viewport.
   const renderedPanel =
-    panel && !isPreview && typeof document !== "undefined"
+    panel && typeof document !== "undefined"
       ? createPortal(panel, document.body)
       : panel;
 

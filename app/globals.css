@@ -1550,13 +1550,13 @@ button:focus-visible {
   cursor: pointer;
 }
 
+/* Docked in the viewport's bottom-right so it never covers the hero heading. */
 .media-preview {
-  position: absolute;
-  z-index: 40;
-  top: calc(100% + 0.6rem);
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(13rem, 70vw);
+  position: fixed;
+  z-index: 60;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  width: min(21rem, 84vw);
 }
 
 .media-preview .media-dialog__panel {
@@ -1643,7 +1643,7 @@ button:focus-visible {
 }
 
 .media-preview .media-gallery img {
-  max-height: 11rem;
+  max-height: 15rem;
   width: 100%;
   height: auto;
   border-radius: 0.4rem;
@@ -1666,12 +1666,16 @@ button:focus-visible {
 
 .directors-gallery__figure {
   margin: 0;
+  max-width: 30rem;
   border: 1px solid color-mix(in srgb, var(--bio-400) 32%, transparent);
-  padding: 0.75rem;
+  border-radius: 0.6rem;
+  padding: 0.6rem;
   background: var(--night-950);
 }
 
 .directors-gallery__figure img {
+  max-height: 26rem;
+  border-radius: 0.4rem;
   object-fit: contain;
 }
 

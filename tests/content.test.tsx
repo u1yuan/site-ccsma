@@ -117,10 +117,14 @@ describe("typed content modules", () => {
     expect(
       Object.values(programIllustrations).every((items) => items.length === 0),
     ).toBe(true);
-    // Director photos are placeholders until the human adds per-person files.
-    expect(Object.values(directors).every((items) => items.length === 0)).toBe(
-      true,
-    );
+    // Per-org director photos are placeholders; SADU shows the combined
+    // leadership image supplied by the human.
+    expect(
+      Object.entries(directors)
+        .filter(([group]) => group !== "sadu")
+        .every(([, items]) => items.length === 0),
+    ).toBe(true);
+    expect(directors.sadu).toHaveLength(1);
     expect(accreditations.map((mark) => mark.label)).toEqual([
       "PAASCU",
       "PICAB",

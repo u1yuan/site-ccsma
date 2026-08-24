@@ -46,5 +46,10 @@ export const directors: Record<string, DirectorItem[]> = {
   jpcs: [],
   prism: [],
   scc: [],
-  sadu: [],
+  sadu: [
+    {
+      src: "/directors/sadu/directors.png",
+      alt: "SADO Senior Directors and Directors",
+    },
+  ],
 };
