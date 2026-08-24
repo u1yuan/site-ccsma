@@ -25,7 +25,11 @@ export const programs: Program[] = [
       "Includes the study of computing concepts and theories, algorithmic foundations, and new developments in computing. The program prepares students to design and create algorithmically complex software and develop new and effective algorithms for solving computing problems. Graduates of this program can expect a successful and rewarding career in specification design, coding, and software testing. It also focuses on software engineering, database, and large-scale software.",
     status: "official",
     flora: "crystal",
-    specializations: ["Data Science", "Software Engineering"],
+    specializations: [
+      "Data Science",
+      "Artificial Intelligence",
+      "Software Engineering",
+    ],
   },
   {
     id: "information-technology",
