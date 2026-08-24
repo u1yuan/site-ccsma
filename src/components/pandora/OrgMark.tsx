@@ -9,9 +9,9 @@ export function OrgMark({
 }) {
   if (organization.logo) {
     return (
-      <div className="org-card__mark">
+      <div className="org-mark org-mark--photo">
         <img
-          className="org-card__logo"
+          className="org-mark__logo"
           src={organization.logo}
           alt={decorative ? "" : `${organization.name} logo`}
           aria-hidden={decorative || undefined}
@@ -21,8 +21,8 @@ export function OrgMark({
   }
 
   return (
-    <div className="org-card__mark">
-      <span className="org-card__monogram" aria-hidden="true">
+    <div className="org-mark">
+      <span className="org-mark__monogram" aria-hidden="true">
         {organization.abbr}
       </span>
     </div>

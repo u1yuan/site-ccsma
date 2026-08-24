@@ -58,6 +58,7 @@ export function GlowTree({ variant }: { variant: "groves" | "souls" }) {
             <MediaReveal
               title={light.label}
               items={activityMedia[light.key] ?? []}
+              previewOnHover
             >
               <span className="sr-only">{light.label}</span>
               <span className="glow-tree__hotspot" aria-hidden="true" />

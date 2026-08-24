@@ -19,14 +19,13 @@ export function developmentProgramId(label: string) {
     .replace(/^-+|-+$/g, "");
 }
 
-// TODO(human): add entries as image files land in public/activities/<org-slug>/
 export const activityMedia: Record<string, MediaItem[]> = {
-  acm: [],
-  aits: [],
-  jpcs: [],
-  prism: [],
-  scc: [],
-  sadu: [],
+  acm: [{ src: "/activities/acm/01.jpg", alt: "ACM student activity" }],
+  aits: [{ src: "/activities/aits/01.jpg", alt: "AITS student activity" }],
+  jpcs: [{ src: "/activities/jpcs/01.jpg", alt: "JPCS student activity" }],
+  prism: [{ src: "/activities/prism/01.jpg", alt: "PRISM student activity" }],
+  scc: [{ src: "/activities/scc/01.jpg", alt: "SCC student activity" }],
+  sadu: [{ src: "/activities/sadu/01.jpg", alt: "SADU student activity" }],
 };
 
 // TODO(human): add entries as image files land in public/programs/<program-id>/
@@ -47,5 +46,10 @@ export const directors: Record<string, DirectorItem[]> = {
   jpcs: [],
   prism: [],
   scc: [],
-  sadu: [],
+  sadu: [
+    {
+      src: "/directors/sadu/directors.png",
+      alt: "SADO Senior Directors and Directors",
+    },
+  ],
 };

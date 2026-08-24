@@ -51,20 +51,21 @@ Easings are defined once in `src/lib/motion/tokens.ts`. All primitives read `use
 
 Type scale tokens live on `:root` as `--font-size-hero`, `--font-size-section`, `--font-size-card`, `--font-size-display`, and `--font-size-mantra`. Headings use those tokens with `clamp()` so hero, section, card, and mantra sizes stay one family and do not overflow on mobile.
 
-**Media reveal:** GlowTree lights and SADU development-program items are focusable buttons. They open a dialog of `activityMedia` / `programIllustrations` (or a "Photos coming soon" placeholder). Keyboard: Tab to the trigger, Enter/Space to open, Escape to close. Hover may brighten a node; it is never the only way in. Dialog content is present with `prefers-reduced-motion`.
+**Media reveal:** GlowTree lights and SADU development-program items are focusable buttons. Hovering or focusing a GlowTree light reveals that branch's `activityMedia` in a small preview panel beside the node (the same "Photos coming soon" placeholder when the array is empty). Enter/Space pins the same pictures in a dialog; Escape dismisses. Hover is the adviser's primary interaction; keyboard and click are the accessible equivalent. Under `prefers-reduced-motion` the panel appears statically with no motion. SADU development-program items stay click-to-illustrate dialogs.
 
 ## Component Patterns
 
 - **Section** (`src/components/scroll/Section.tsx`) — the unit of scroll storytelling; a full-height block with a consistent heading treatment and a `Bloom` wrapper.
 - **Flora** (`ProgramFlora`, `GlowFlora`) — decorative SVG/CSS organisms; each program gets a distinct flora silhouette color-coded by palette token.
-- **OrgCard / MantraRoots** — presentational cards with a glow border (`navi-600` base, `bio-400` hover/focus glow) and a clear focus ring.
+- **OrgCard / MantraRoots** — hub org nodes are compact logo + abbr links (`org-node`) with a bio-glow chip; hover/focus scales and pulses unless reduced motion, which uses a static highlight. Full org copy lives on the detail route. Mantra roots keep a glow border (`navi-600` base, `bio-400` hover/focus glow) and a clear focus ring.
+- **SiteHeader** — sticky and scroll-aware: tall and more transparent at the top, condensed with stronger blur, darker `night-950` mix, and a token shadow after ~0.55 viewport. Instant under reduced motion. The brand mark is a decorative inline-SVG seed/sprout (`aria-hidden`); "CCSMA" plus the "Bio-digital campus" tagline carry the name. Skip link and `aria-current` stay intact.
 - Use a pattern from `src/components/pandora/` before inventing a new one; new shared patterns belong there, not inline in a route.
 
 ## Per-route scroll narrative
 
-- `/` — Paraverse-style landing layout: large hero headline, short support line, calm starfield/bio background using existing tokens and the woodsprite canvas, accreditation chips, then six program flora blooming in order.
-- `/organizations` — The clans: four groves (ACM, AITS, JPCS, PRISM) connected by SCC rendered as the Tree of Voices that links them.
-- `/student-activities` — The Tree of Souls: vision, mission, roles, programs, then the Serve / Lead / Excel mantra as three glowing roots, ending on the contact block.
+- `/` — Paraverse landing layout: large hero headline, one short support line, calm token starfield/bio background, woodsprite canvas, accreditation chips, then the six program sections below.
+- `/organizations` — Logo constellation: four grove nodes (ACM, AITS, JPCS, PRISM) connected by bio-vine lines to a larger SCC connector node. The hub shows logo + abbr only; click/Enter opens `/organizations/<slug>/`.
+- `/student-activities` — The Tree of Souls with the SADU logo in the hero: Vision, Mission, Roles and Function, Student Development programs, Student Activities responsibilities, Serve / Lead / Excel mantra roots, the combined directors graphic, and the full contact block.
 
 ## Accessibility Requirements
 
@@ -76,7 +77,7 @@ Type scale tokens live on `:root` as `--font-size-hero`, `--font-size-section`, 
 
 ## Open Questions
 
-- Real logos, officer names, and official descriptions for ACM, AITS, JPCS, and PRISM — pending the orgs/SADU supplying them (see `.cursor/CONTENT.md` placeholders).
+- Official org descriptions and named director credits — logos and the combined SADO directors graphic are now wired; remaining activity photos and per-person credits stay pending (see `.cursor/CONTENT.md`).
 - Official FEU Tech endorsement and permission to ship publicly — currently an unofficial concept (see PRD "Standing").
 - Final photography/illustration assets — v0 uses CSS/SVG-only visuals; real artwork is out of scope until supplied.
 

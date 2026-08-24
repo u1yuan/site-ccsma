@@ -11,14 +11,6 @@ export function ProgramsHero() {
       visual={<WoodspriteHero />}
       className="route-hero--programs route-hero--paraverse"
     >
-      <div className="route-index" aria-label="Programs on this page">
-        <span>BSCS</span>
-        <span>BSIT</span>
-        <span>BMMA</span>
-        <span>BSCY</span>
-        <span>BDMM</span>
-        <span>BSFTE</span>
-      </div>
       <AccreditationStrip />
     </HeroFrame>
   );

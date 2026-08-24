@@ -13,12 +13,13 @@ export function DirectorsGallery({ group }: { group: string }) {
       <p className="utility-label">Leadership</p>
       <h2 id={`${group}-directors`}>Directors</h2>
       {items.length ? (
-        <ul>
+        <ul className="directors-gallery__list">
           {items.map((item) => (
             <li key={item.src}>
-              <img src={item.src} alt={item.alt} />
-              {item.name ? <p>{item.name}</p> : null}
-              {item.role ? <p className="utility-label">{item.role}</p> : null}
+              <figure className="directors-gallery__figure">
+                <img src={item.src} alt={item.alt} />
+                <figcaption>{item.alt}</figcaption>
+              </figure>
             </li>
           ))}
         </ul>

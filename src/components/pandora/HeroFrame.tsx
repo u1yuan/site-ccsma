@@ -6,6 +6,7 @@ export function HeroFrame({
   intro,
   visual,
   children,
+  mark,
   className = "",
 }: {
   eyebrow: string;
@@ -13,6 +14,7 @@ export function HeroFrame({
   intro: string;
   visual: ReactNode;
   children?: ReactNode;
+  mark?: ReactNode;
   className?: string;
 }) {
   return (
@@ -21,7 +23,9 @@ export function HeroFrame({
       aria-labelledby="route-heading"
     >
       <div className="route-hero__grid" aria-hidden="true" />
+      <div className="route-hero__stars" aria-hidden="true" />
       <div className="route-hero__content">
+        {mark}
         <p className="utility-label">{eyebrow}</p>
         <h1 id="route-heading">{title}</h1>
         <p className="route-hero__intro">{intro}</p>

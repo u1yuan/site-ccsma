@@ -46,11 +46,11 @@ The programs hero also shows an accreditation strip (PAASCU, PICAB, Cisco, SAP, 
 
 The four CCSMA-affiliated academic RSOs are the **Association for Computing Machinery (ACM)**, **Alliance of Information Technology Students (AITS)**, **Junior Philippine Computer Society (JPCS)**, and **PRISM — Pioneers of Relentless and Innovative Storytellers in Multimedia Arts** (the multimedia arts org). The **Student Coordinating Council (SCC)** is FEU Tech's highest governing student body.
 
-All five entries carry `status: "summary"`: compiled from public sources (org Facebook/Instagram pages and FEU Tech pages), **not** verbatim official FEU copy. Each card shows a quiet **Community description** provenance label. Do not present this copy as FEU's official text. If a specific org is later officially blessed, set that entry to `status: "official"` and drop the label.
+All five entries carry `status: "summary"`: compiled from public sources (org Facebook/Instagram pages and FEU Tech pages), **not** verbatim official FEU copy. The `/organizations` hub is a **logo constellation**: each org is a compact logo node (JPG in a token chip, OrgMark monogram fallback) plus its abbreviation. Full descriptions, mission, vision, motto, values, and the quiet **Community description** provenance label live only on `/organizations/<id>/`. Do not present this copy as FEU's official text. If a specific org is later officially blessed, set that entry to `status: "official"` and drop the label.
 
-Logo files live under `/logos/orgs/` (e.g. `/logos/orgs/acm.png`) and are added by hand with the orgs' permission. Until a `logo` path is set, the card renders a themed monogram fallback. Do not scrape or invent logos.
+Logo files live under `/logos/orgs/` (`/logos/orgs/acm.jpg`, `aits.jpg`, `jpcs.jpg`, `prism.jpg`, `scc.jpg`) and are added by hand with the orgs' permission. Until a `logo` path is set, the node renders a themed monogram fallback. Do not scrape or invent logos.
 
-Each org also has a detail route `/organizations/<id>/` (acm, aits, jpcs, prism, scc) with the same copy plus empty activity-photo and directors galleries from `src/content/media.ts`. Those manifests start empty; the UI shows a "Photos coming soon" panel until the human adds `{ src, alt }` entries. Invent no director names or titles.
+Each org also has a detail route `/organizations/<id>/` (acm, aits, jpcs, prism, scc) with the compiled copy plus activity-photo and directors galleries from `src/content/media.ts`. Activity manifests start empty; the UI shows a "Photos coming soon" panel until the human adds `{ src, alt }` entries. Invent no director names or titles. The SADU directors slot is one combined graphic (`/directors/sadu/directors.png`, alt "SADO Senior Directors and Directors") — render it as a single labelled image, do not split or invent names.
 
 SCC's motto "Serve. Lead. Excel." is the same institutional language SADU already carries on `/student-activities`. Both surface it by design.
 
@@ -182,4 +182,6 @@ Headline (verbatim lead sentence):
 - Email: sadu@feutech.edu.ph
 - Address: P. Paredes St., Sampaloc, Manila 1015
 
-The Student Development programs list items are keyboard-openable illustration triggers (`programIllustrations` in `src/content/media.ts`). GlowTree lights on the org and SADU heroes open `activityMedia` panels. Both manifests start empty. A directors gallery on this route and on each org detail page is also empty until the human supplies names, titles, and photos. Do not invent SADO details beyond this file.
+`/student-activities` renders every block from `src/content/sadu.ts` in source order: Vision, Mission (list), Roles and Function, Student Development programs, Student Activities responsibilities, the Serve / Lead / Excel mantra roots, then Contact (room, hours, trunkline, email, address). The SADU mark is `/logos/orgs/sadu.png` in the hero. Do not invent or rewrite any of this copy.
+
+The Student Development programs list items are keyboard-openable illustration triggers (`programIllustrations` in `src/content/media.ts`). GlowTree lights on the org and SADU heroes reveal `activityMedia` on hover, keyboard focus, and Enter/Space (Escape dismisses). Both activity and program-illustration manifests start empty, so the same panel shows "Photos coming soon" until files land in `public/activities/<key>/` and `media.ts`. A directors gallery on this route shows the combined SADO graphic; org detail galleries stay empty until the human supplies names, titles, and photos. Do not invent SADO details beyond this file.

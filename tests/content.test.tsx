@@ -61,12 +61,29 @@ describe("typed content modules", () => {
         .every((organization) => organization.role === "grove"),
     ).toBe(true);
 
+    expect(
+      organizations.every((organization) =>
+        organization.logo?.endsWith(`/${organization.id}.jpg`),
+      ),
+    ).toBe(true);
+
     organizations.forEach((organization) => {
-      const { unmount } = render(<OrgCard organization={organization} />);
+      const { container, unmount } = render(
+        <OrgCard organization={organization} />,
+      );
+      const nodeLink = screen.getByRole("link", {
+        name: `${organization.name} details`,
+      });
+      expect(nodeLink.getAttribute("href")).toMatch(
+        new RegExp(`/organizations/${organization.id}/?$`),
+      );
+      expect(screen.getByText(organization.abbr)).toBeVisible();
       expect(
-        screen.getByRole("heading", { name: organization.name }),
-      ).toBeVisible();
-      expect(screen.getByText(organization.description)).toBeVisible();
+        container.querySelector(`img[src="${organization.logo}"]`),
+      ).not.toBeNull();
+      expect(
+        screen.queryByText(organization.description),
+      ).not.toBeInTheDocument();
       unmount();
     });
   });
@@ -85,16 +102,32 @@ describe("typed content modules", () => {
     );
   });
 
-  it("keeps media manifests empty until the human adds files", () => {
+  it("wires activity photos and keeps unfilled manifests empty", () => {
+    // Activity photos are now supplied for every org node on the tree.
+    const activityKeys = ["acm", "aits", "jpcs", "prism", "scc", "sadu"];
+    activityKeys.forEach((key) => {
+      expect(activityMedia[key]?.length).toBeGreaterThan(0);
+    });
     expect(
-      Object.values(activityMedia).every((items) => items.length === 0),
+      Object.values(activityMedia)
+        .flat()
+        .every((item) => item.src.startsWith("/activities/") && item.alt),
     ).toBe(true);
+    // Program illustrations remain placeholders until the human adds files.
     expect(
       Object.values(programIllustrations).every((items) => items.length === 0),
     ).toBe(true);
-    expect(Object.values(directors).every((items) => items.length === 0)).toBe(
-      true,
-    );
+    expect(
+      Object.entries(directors)
+        .filter(([group]) => group !== "sadu")
+        .every(([, items]) => items.length === 0),
+    ).toBe(true);
+    expect(directors.sadu).toEqual([
+      {
+        src: "/directors/sadu/directors.png",
+        alt: "SADO Senior Directors and Directors",
+      },
+    ]);
     expect(accreditations.map((mark) => mark.label)).toEqual([
       "PAASCU",
       "PICAB",

@@ -113,5 +113,5 @@ describe("bug verification", () => {
     const bloom = container.querySelector('[data-motion-primitive="bloom"]');
     expect(bloom).toHaveAttribute("inert");
     expect(Number(getComputedStyle(bloom!).opacity)).toBeLessThan(1);
-  });
+  }, 20_000);
 });

@@ -15,21 +15,31 @@ export function OrganizationsMap() {
   return (
     <div
       id="story-start"
-      className="organizations-map"
+      className="solar-system"
       aria-label="Organization directory"
     >
-      <div className="organizations-map__branches" aria-hidden="true" />
-      <div className="organizations-map__pair">
-        {groves.slice(0, 2).map((organization) => (
-          <OrgCard key={organization.id} organization={organization} />
-        ))}
+      <div className="solar-system__field" aria-hidden="true" />
+
+      {/* SCC — the connecting body at the centre */}
+      <div className="solar-system__sun">
+        <OrgCard organization={connector} />
       </div>
-      <OrgCard organization={connector} />
-      <div className="organizations-map__pair">
-        {groves.slice(2).map((organization) => (
-          <OrgCard key={organization.id} organization={organization} />
-        ))}
-      </div>
+
+      {/* The four grove organizations orbit as logo planets */}
+      {groves.map((organization, index) => (
+        <div
+          key={organization.id}
+          className={`orbit-wrap orbit-wrap--${index + 1}`}
+        >
+          <div className="orbit">
+            <div className="planet">
+              <div className="planet__body">
+                <OrgCard organization={organization} />
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }

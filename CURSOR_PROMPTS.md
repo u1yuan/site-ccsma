@@ -86,6 +86,109 @@ If Cursor struggles to do it all at once, split at the phase boundaries above �
 then 3, then 4 as separate messages, all on the same `feat/adviser-round` branch, running the full
 test gate only after Phase 4.
 
-```
+---
 
+# PROMPT 5 — org constellation redesign + wire real logos + finish landing
+
+Paste this after the one-shot build. It amends Phase 2 (organizations hub) and closes the Phase 4
+landing gap. Reason: the current `/organizations` hub uses big organic "oval" cards (`.org-card`
+blob shapes) with full descriptions crammed inside — the adviser flagged them as hard to read.
+
+```
+Read CURSOR_GUIDE.md again. Stay on branch feat/adviser-round. Keep all guardrails: no new deps, no
+WebGL, tokens only (no raw hex), no invented copy, accessibility floor + reduced-motion, run the full
+test gate at the end and paste output. Three tasks:
+
+TASK A — Redesign the /organizations HUB into a logo constellation (fixes the "big ovals / hard to
+read" adviser flag):
+- Replace the big organic oval .org-card layout on the /organizations hub. Each org becomes a COMPACT
+  LOGO NODE (the org's logo, with the existing OrgMark monogram as fallback), showing only the logo +
+  abbr on the hub — NOT the full description.
+- SCC stays the CENTER connector node: larger/highlighted, with the existing bio-vine lines
+  (organizations-map__branches) connecting the four grove orgs to it. Keep array order; SCC stays
+  role "connector" in the middle.
+- HOVER = animation: gentle scale + bio-glow pulse on the node, using existing motion tokens. Under
+  prefers-reduced-motion, show a static highlight instead (no movement). Keyboard focus gets the SAME
+  highlight as hover.
+- CLICK / Enter = navigate to that org's detail page /organizations/<slug>/ where the full
+  description, mission, vision, motto, values already live. Each node is a real next/link, focusable,
+  keyboard-activatable, axe-clean.
+- Move the descriptions OFF the hub entirely — the hub is now logos only; descriptions live on the
+  detail pages. Update any test that asserted description text on /organizations/ to instead assert
+  it on the /organizations/<slug>/ detail route, and assert the hub shows each org's abbr/logo node.
+  Do NOT weaken assertions — move them to the correct place.
+
+TASK B — Wire the REAL logos + directors image (files are already in public/, added by the human):
+- public/logos/orgs/acm.jpg, aits.jpg, jpcs.jpg, prism.jpg, scc.jpg  → set each org's `logo` field in
+  src/content/organizations.ts to these paths.
+- These are JPGs (no transparency). Put every logo inside a subtle rounded token panel/chip (bio-glow
+  ring + deep base fill, same language as OrgMark) so the square photo edges look intentional on the
+  dark background. Contain the image; don't distort aspect ratios.
+- public/logos/orgs/sadu.png → use as the SADU/SADO logo on the /student-activities hero or section.
+- public/directors/sadu/directors.png is ONE combined graphic of SADO Sr Directors & Directors. Add it
+  to the `directors` manifest as a single sadu entry { src: "/directors/sadu/directors.png", alt:
+  "SADO Senior Directors and Directors" } and render it in the directors gallery as one labelled image
+  (do not try to split it into per-person cards; do not invent names).
+
+TASK C — Finish the Paraverse LANDING (Phase 4 gap — app/page.tsx is still the untouched MVP):
+- Restructure app/page.tsx / ProgramsHero into the Paraverse LAYOUT: large hero headline, one short
+  supporting line, calm token-based starfield/bio background using existing scroll components. LAYOUT
+  ONLY — no full interactivity, no new libs, no WebGL. Keep the six program sections below the hero.
+
+TASK D — Fully surface the Student Activities (SADU) page from real FEU Tech content:
+- Source of truth: https://www.feutech.edu.ph/campus_life/sa . The data already lives in
+  src/content/sadu.ts and MATCHES that page — do NOT invent or rewrite copy. Your job is to make the
+  /student-activities page RENDER ALL of it, clearly labelled, in this order, mirroring the FEU page:
+    1. Vision  (sadu.vision)
+    2. Mission  (sadu.mission[] — render as a list)
+    3. Roles and Function  (sadu.roles[])
+    4. Student Development Programs  (sadu.developmentPrograms[] — these are the click-to-illustrate
+       triggers from Phase 3; keep that behavior)
+    5. Student Activities Responsibilities  (sadu.activityResponsibilities[])
+    6. Mantra: Serve, Lead, Excel  (the existing MantraRoots)
+    7. Contact  (sadu.contact — room, hours, trunkline, email, address, ALL shown)
+- If any of these sections is currently not rendered on /student-activities, add it using existing
+  components/tokens. Use the SADU logo (public/logos/orgs/sadu.png) in the hero/section header.
+  Keep the directors gallery (Task B) on this page too. Do not add facts beyond sadu.ts.
+
+TASK E — Redesign the nav bar (SiteHeader) to match the new landing vibe:
+- The header is already position:sticky. Make it SCROLL-AWARE: at the top of the page it's tall and
+  transparent-ish; once the user scrolls down past ~1 viewport-ish / a threshold, it CONDENSES —
+  shorter height, stronger backdrop blur + darker token background, subtle shadow — and smoothly
+  transitions back when scrolled to top. (SiteHeader is already a client component; add a scroll
+  listener that toggles a `data-scrolled`/condensed class — NO new dependencies.) Under
+  prefers-reduced-motion, switch states instantly with no transition. Keep it keyboard-reachable with
+  a visible focus ring; the skip-to-content link and aria-current behavior must still work.
+- Style the nav to feel cohesive with the Paraverse landing (Task C) — same token palette, glow
+  language, and type scale. Tokens only, no raw hex.
+- REPLACE the generic "C/" wordmark mark: remove the literal "C/" text box entirely. In its place
+  build a small CREATIVE inline-SVG brand mark using existing bio/flora tokens and the same glow
+  language as GlowTree/Pulse (e.g. a glowing seed / sprout / vine-node — a bio-digital motif, not a
+  letter). It must be crisp at ~2rem, decorative (aria-hidden) since the adjacent "CCSMA" text carries
+  the accessible name. Keep the "CCSMA" wordmark and refine the "Bio-digital campus" tagline styling to
+  match. Keep the whole wordmark a link to home with an aria-label.
+
+TASK F — Confirm the tree HOVER reveals pictures (Doc Hazel: "Once pointer is hovered, pictures of
+school activities must appear"):
+- On GlowTree, HOVERING a light node must reveal that branch's school-activity pictures (from
+  activityMedia). Hover is the primary interaction the adviser asked for — make it work on
+  mouseenter/focus, showing a small image panel/preview near the node.
+- Because hover alone is not accessible, the SAME reveal must also open on keyboard focus + Enter/Space
+  and be Escape-dismissible, and render statically under prefers-reduced-motion (per §2.4). Hover =
+  adviser's requirement; keyboard/click = the accessible equivalent. Both show the same pictures.
+- Each node maps to an org (or sadu) key in activityMedia. When that key's array is empty, show the
+  §2.3 "Photos coming soon" placeholder in the same panel — so the mechanism is provably working even
+  before real photos exist, and real photos appear automatically once added to
+  public/activities/<key>/ + media.ts.
+
+Update .cursor/CONTENT.md and .cursor/DESIGN.md to describe the new hub-as-constellation, the landing,
+the fully-surfaced SADU page, the scroll-aware header + new brand mark, and the tree hover/focus
+picture reveal.
+
+Then run, in order, and paste output: npm run format:write, npm run lint, npm run typecheck, npm test,
+npm run build, npm run test:e2e. Do NOT auto-update e2e/visual.spec.ts snapshots (hub + landing moved
+pixels) — flag them and wait for me. Do NOT weaken assertions.
+
+DO NOT commit, DO NOT push, DO NOT open a PR — leave ALL changes unstaged in the working tree. The
+human will review and commit everything themselves.
 ```

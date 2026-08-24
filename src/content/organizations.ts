@@ -17,8 +17,8 @@ export interface Organization {
   motto?: string;
   values?: string[];
   links?: OrgLink[];
-  // Optional path under /logos/orgs/, e.g. "/logos/orgs/acm.png".
-  // Leave unset until the human drops the PNG — the card then shows a monogram.
+  // Optional path under /logos/orgs/, e.g. "/logos/orgs/acm.jpg".
+  // Leave unset until the human drops the file — the node then shows a monogram.
   logo?: string;
 }
 
@@ -40,6 +40,7 @@ export const organizations: Organization[] = [
     name: "Association for Computing Machinery — FEU Tech Student Chapter",
     status: "summary",
     role: "grove",
+    logo: "/logos/orgs/acm.jpg",
     description:
       "Driven by innovation and united by passion, the FEU Tech ACM Student Chapter is a recognized student organization that stands as the mother organization of the Computer Science department of the institution and the Philippines' second internationally accredited ACM student chapter — empowering students to explore their passion for technology, spark innovation, and shape the future, one line of code at a time.",
     mission:
@@ -54,6 +55,7 @@ export const organizations: Organization[] = [
     name: "Alliance of Information Technology Students",
     status: "summary",
     role: "grove",
+    logo: "/logos/orgs/aits.jpg",
     description:
       "The Alliance of Information Technology Students (AITS) is the official academic organization for IT students at the FEU Institute of Technology. Established in 2014, AITS creates an inclusive space for growth by offering technical seminars, coding challenges, and peer-led tutorials. Driven by its mission to empower student growth and its vision to foster a passion-driven IT community, the organization shapes future-ready tech leaders while upholding the university values of Fortitude, Excellence, and Uprightness.",
   },
@@ -63,6 +65,7 @@ export const organizations: Organization[] = [
     name: "Junior Philippine Computer Society — FEU Tech",
     status: "summary",
     role: "grove",
+    logo: "/logos/orgs/jpcs.jpg",
     description:
       "The Junior Philippine Computer Society – FEU Tech (JPCS–FEU Tech) is the student chapter of the national Philippine Computer Society. Recognized as one of the oldest student organizations at the FEU Institute of Technology, it serves students in IT, Computer Science, Multimedia Arts, and Engineering, bridging classroom knowledge, industry standards, and emerging technologies through real-world networking, hackathons, and corporate partnerships.",
     mission:
@@ -76,6 +79,7 @@ export const organizations: Organization[] = [
     name: "Pioneers of Relentless and Innovative Storytellers in Multimedia Arts",
     status: "summary",
     role: "grove",
+    logo: "/logos/orgs/prism.jpg",
     description:
       "The Pioneers of Relentless and Innovative Storytellers in Multimedia Arts (PRISM) is the official academic organization of the Multimedia Arts Department at the FEU Institute of Technology. Serving students majoring in animation and digital film, PRISM is a creative hub that connects freshmen and senior student-artists — helping them navigate their art journeys, master creative tools, and showcase visual storytelling.",
     mission:
@@ -89,6 +93,7 @@ export const organizations: Organization[] = [
     name: "Student Coordinating Council",
     status: "summary",
     role: "connector",
+    logo: "/logos/orgs/scc.jpg",
     description:
       "The FEU Tech Student Coordinating Council (SCC) is the highest governing student body and the official student representative at the FEU Institute of Technology. Run by student leaders, it serves as the voice of the student body — bridging the gap between the university administration and the learners, and overseeing the Recognized Student Organizations on campus.",
     mission:

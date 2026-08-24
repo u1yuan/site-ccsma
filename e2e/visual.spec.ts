@@ -15,7 +15,7 @@ for (const route of visualRoutes) {
     await page.goto(route.path, { waitUntil: "networkidle" });
     await page.addStyleTag({
       content:
-        ".story-section, .org-card { content-visibility: visible !important; } [data-motion-primitive] { opacity: 1 !important; transform: none !important; filter: none !important; }",
+        ".story-section, .org-card, .org-node { content-visibility: visible !important; } [data-motion-primitive] { opacity: 1 !important; transform: none !important; filter: none !important; }",
     });
     await page.waitForTimeout(100);
 

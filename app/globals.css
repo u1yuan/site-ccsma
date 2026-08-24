@@ -91,9 +91,26 @@ button:focus-visible {
   position: sticky;
   z-index: 50;
   top: 0;
+  height: 4.75rem;
   border-bottom: 1px solid color-mix(in srgb, var(--navi-600) 58%, transparent);
-  background: color-mix(in srgb, var(--night-950) 90%, transparent);
-  backdrop-filter: blur(12px);
+  background: color-mix(in srgb, var(--night-950) 42%, transparent);
+  backdrop-filter: blur(8px);
+  transition:
+    height 280ms ease,
+    background 280ms ease,
+    box-shadow 280ms ease;
+}
+
+.site-header[data-scrolled="true"] {
+  height: 3.25rem;
+  background: color-mix(in srgb, var(--night-950) 92%, transparent);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 0.6rem 1.8rem
+    color-mix(in srgb, var(--night-950) 55%, transparent);
+}
+
+.site-header[data-motion-state="static"] {
+  transition: none;
 }
 
 .site-header::after {
@@ -109,12 +126,26 @@ button:focus-visible {
 .site-header__inner {
   display: flex;
   width: min(100%, var(--content-width));
-  min-height: 4.5rem;
+  height: 4.75rem;
+  min-height: 4.75rem;
   margin-inline: auto;
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
+  overflow: hidden;
   padding-inline: var(--page-gutter);
+  transition:
+    height 280ms ease,
+    min-height 280ms ease;
+}
+
+.site-header[data-scrolled="true"] .site-header__inner {
+  height: 3.25rem;
+  min-height: 3.25rem;
+}
+
+.site-header[data-motion-state="static"] .site-header__inner {
+  transition: none;
 }
 
 .wordmark {
@@ -127,15 +158,26 @@ button:focus-visible {
 }
 
 .wordmark__mark {
-  display: grid;
+  display: block;
   width: 2rem;
   height: 2rem;
-  place-items: center;
-  border: 1px solid color-mix(in srgb, var(--bio-400) 55%, transparent);
-  color: var(--bio-400);
-  font-family: var(--font-jetbrains-mono), Consolas, monospace;
-  font-size: 0.7rem;
-  box-shadow: inset 0 0 1rem color-mix(in srgb, var(--bio-400) 12%, transparent);
+  overflow: visible;
+}
+
+.wordmark__seed {
+  fill: var(--bio-400);
+  filter: drop-shadow(0 0 0.45rem var(--bio-400));
+}
+
+.wordmark__sprout {
+  fill: var(--flora-500);
+  opacity: 0.88;
+}
+
+.wordmark__stem {
+  fill: none;
+  stroke: var(--bio-400);
+  stroke-width: 1.4;
 }
 
 .wordmark strong,
@@ -145,15 +187,16 @@ button:focus-visible {
 
 .wordmark strong {
   font-family: var(--font-poppins), Arial, sans-serif;
-  font-size: 0.86rem;
-  letter-spacing: 0.09em;
+  font-size: 0.95rem;
+  letter-spacing: 0.14em;
 }
 
 .wordmark small {
-  color: color-mix(in srgb, var(--ink-100) 62%, transparent);
+  color: color-mix(in srgb, var(--bio-400) 70%, var(--ink-100));
   font-family: var(--font-jetbrains-mono), Consolas, monospace;
   font-size: 0.58rem;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .nav-list {
@@ -190,6 +233,7 @@ button:focus-visible {
 .nav-link:hover,
 .nav-link[aria-current="page"] {
   color: var(--sprite-100);
+  text-shadow: 0 0 0.8rem color-mix(in srgb, var(--bio-400) 42%, transparent);
 }
 
 .nav-link:hover::after,
@@ -207,6 +251,35 @@ button:focus-visible {
   align-items: center;
   gap: clamp(2rem, 5vw, 6rem);
   padding: clamp(5rem, 11vh, 8rem) var(--page-gutter) clamp(6rem, 13vh, 9rem);
+}
+
+.route-hero__stars {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  opacity: 0.55;
+  background-image:
+    radial-gradient(
+      circle at 12% 22%,
+      color-mix(in srgb, var(--sprite-100) 55%, transparent) 0 0.12rem,
+      transparent 0.18rem
+    ),
+    radial-gradient(
+      circle at 78% 18%,
+      color-mix(in srgb, var(--bio-400) 45%, transparent) 0 0.08rem,
+      transparent 0.14rem
+    ),
+    radial-gradient(
+      circle at 64% 72%,
+      color-mix(in srgb, var(--flora-500) 40%, transparent) 0 0.1rem,
+      transparent 0.16rem
+    ),
+    radial-gradient(
+      circle at 28% 80%,
+      color-mix(in srgb, var(--sprite-100) 35%, transparent) 0 0.07rem,
+      transparent 0.12rem
+    );
+  pointer-events: none;
 }
 
 .route-hero__grid {
@@ -573,6 +646,7 @@ button:focus-visible {
 .glow-tree {
   position: absolute;
   inset: 0;
+  overflow: visible;
   color: var(--bio-400);
 }
 
@@ -621,9 +695,9 @@ button:focus-visible {
 
 .organizations-map {
   position: relative;
-  width: min(100%, var(--content-width));
+  width: min(100%, 46rem);
   margin-inline: auto;
-  padding: 7rem var(--page-gutter) 10rem;
+  padding: 5rem var(--page-gutter) 8rem;
 }
 
 .organizations-map__branches {
@@ -644,54 +718,91 @@ button:focus-visible {
   gap: clamp(2rem, 7vw, 7rem);
 }
 
-.org-card {
-  position: relative;
-  min-height: 31rem;
-  margin-block: 2rem 8rem;
-  border: 1px solid color-mix(in srgb, var(--navi-600) 74%, transparent);
-  border-radius: 46% 54% 48% 52% / 38% 44% 56% 62%;
-  padding: clamp(3rem, 7vw, 6rem) clamp(2rem, 5vw, 4.5rem);
-  background:
-    radial-gradient(
-      circle at 50% 100%,
-      color-mix(in srgb, var(--bio-400) 14%, transparent),
-      transparent 54%
-    ),
-    color-mix(in srgb, var(--night-900) 75%, transparent);
+.org-node {
+  display: grid;
+  place-items: center;
+  margin-block: 1.5rem 2.5rem;
+}
+
+.org-node--connector {
+  margin-block: 0.5rem 2.5rem;
+}
+
+.org-node__link {
+  display: grid;
+  place-items: center;
+  gap: 0.7rem;
+  color: inherit;
+  text-decoration: none;
+  transition:
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.org-node__link:hover,
+.org-node__link:focus-visible {
+  transform: scale(1.07);
+  filter: drop-shadow(
+    0 0 1.4rem color-mix(in srgb, var(--bio-400) 55%, transparent)
+  );
+  animation: org-node-pulse 4.8s ease-in-out infinite;
+}
+
+@keyframes org-node-pulse {
+  50% {
+    filter: drop-shadow(
+      0 0 1.9rem color-mix(in srgb, var(--bio-400) 78%, transparent)
+    );
+  }
+}
+
+.org-node--connector .org-mark {
+  width: 7.5rem;
+  height: 7.5rem;
+}
+
+.org-node__abbr {
+  margin: 0;
+  color: var(--sprite-100);
+  font-family: var(--font-poppins), Arial, sans-serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.12em;
+}
+
+.org-mark,
+.org-card__mark {
+  display: grid;
+  width: 5.6rem;
+  height: 5.6rem;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--bio-400) 58%, transparent);
+  border-radius: 1.15rem;
+  background: var(--night-950);
   box-shadow:
-    inset 0 0 4rem color-mix(in srgb, var(--navi-600) 15%, transparent),
-    0 0 4rem color-mix(in srgb, var(--flora-500) 5%, transparent);
-  content-visibility: auto;
-  contain-intrinsic-size: auto 31rem;
+    inset 0 0 1.1rem color-mix(in srgb, var(--navi-600) 35%, transparent),
+    0 0 1.15rem color-mix(in srgb, var(--bio-400) 32%, transparent);
 }
 
-.org-card:nth-child(even) {
-  transform: translateY(5rem);
-  border-radius: 55% 45% 56% 44% / 47% 61% 39% 53%;
+.org-mark--photo {
+  padding: 0.4rem;
 }
 
-.org-card::before {
-  position: absolute;
-  z-index: -1;
-  inset: -1.15rem;
-  border: 1px dashed color-mix(in srgb, var(--bio-400) 23%, transparent);
-  border-radius: inherit;
-  content: "";
+.org-mark__logo,
+.org-card__logo {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
 }
 
-.org-card--connector {
-  width: min(100%, 38rem);
-  min-height: 28rem;
-  margin: 1rem auto 8rem;
-  transform: none;
-  border-color: color-mix(in srgb, var(--bio-400) 55%, transparent);
-  background:
-    radial-gradient(
-      circle,
-      color-mix(in srgb, var(--flora-500) 16%, transparent),
-      transparent 60%
-    ),
-    var(--night-900);
+.org-mark__monogram,
+.org-card__monogram {
+  color: var(--sprite-100);
+  font-family: var(--font-poppins), Arial, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
 }
 
 .org-card__signal {
@@ -739,40 +850,6 @@ button:focus-visible {
 
 .placeholder-state span {
   color: var(--campus-gold);
-}
-
-.org-card__mark {
-  display: grid;
-  width: 4.75rem;
-  height: 4.75rem;
-  margin-bottom: 1.75rem;
-  place-items: center;
-}
-
-.org-card__logo {
-  max-width: 4.75rem;
-  max-height: 4.75rem;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-}
-
-.org-card__monogram {
-  display: grid;
-  width: 4.75rem;
-  height: 4.75rem;
-  place-items: center;
-  border: 1px solid color-mix(in srgb, var(--bio-400) 58%, transparent);
-  border-radius: 50%;
-  background: var(--night-950);
-  box-shadow:
-    inset 0 0 1.1rem color-mix(in srgb, var(--navi-600) 35%, transparent),
-    0 0 1.15rem color-mix(in srgb, var(--bio-400) 32%, transparent);
-  color: var(--sprite-100);
-  font-family: var(--font-poppins), Arial, sans-serif;
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
 }
 
 .org-card__provenance {
@@ -1248,13 +1325,10 @@ button:focus-visible {
     left: 1.6rem;
   }
 
-  .org-card,
-  .org-card:nth-child(even),
-  .org-card--connector {
+  .org-node,
+  .org-node--connector {
     width: 100%;
-    min-height: 25rem;
-    margin-block: 2rem 5rem;
-    transform: none;
+    margin-block: 1.25rem 2rem;
   }
 
   .sadu-trunk {
@@ -1393,7 +1467,28 @@ button:focus-visible {
 
 .glow-tree__lights li {
   position: absolute;
+  z-index: 1;
   transform: translate(-50%, -50%);
+}
+
+.glow-tree__lights li:hover,
+.glow-tree__lights li:focus-within {
+  z-index: 6;
+}
+
+.sadu-logo {
+  display: block;
+  width: 5.5rem;
+  height: 5.5rem;
+  margin-bottom: 1.25rem;
+  border: 1px solid color-mix(in srgb, var(--bio-400) 58%, transparent);
+  border-radius: 1.15rem;
+  padding: 0.4rem;
+  object-fit: contain;
+  background: var(--night-950);
+  box-shadow:
+    inset 0 0 1.1rem color-mix(in srgb, var(--navi-600) 35%, transparent),
+    0 0 1.15rem color-mix(in srgb, var(--bio-400) 32%, transparent);
 }
 
 .glow-tree__hotspot {
@@ -1405,6 +1500,10 @@ button:focus-visible {
   box-shadow: 0 0 0.9rem color-mix(in srgb, var(--bio-400) 45%, transparent);
 }
 
+.media-reveal {
+  position: relative;
+}
+
 .media-reveal__trigger {
   display: inline;
   border: 0;
@@ -1414,6 +1513,20 @@ button:focus-visible {
   font: inherit;
   text-align: left;
   cursor: pointer;
+}
+
+.media-preview {
+  position: absolute;
+  z-index: 40;
+  top: calc(100% + 0.6rem);
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(13rem, 70vw);
+}
+
+.media-preview .media-dialog__panel {
+  width: 100%;
+  padding: 1rem;
 }
 
 .media-dialog {
@@ -1481,6 +1594,59 @@ button:focus-visible {
   object-fit: cover;
 }
 
+/* Hover preview: compact, consistently framed thumbnail (no Close chrome). */
+.media-preview .media-dialog__header {
+  margin-bottom: 0.6rem;
+}
+
+.media-preview .media-dialog__header h2 {
+  font-size: 0.82rem;
+}
+
+.media-preview .media-dialog__close {
+  display: none;
+}
+
+.media-preview .media-gallery img {
+  max-height: 11rem;
+  width: 100%;
+  height: auto;
+  border-radius: 0.4rem;
+  object-fit: contain;
+}
+
+/* Pinned modal: show the whole photo, never taller than the viewport. */
+.media-dialog .media-gallery img {
+  max-height: min(70vh, 32rem);
+  object-fit: contain;
+  border-radius: 0.4rem;
+  background: var(--night-950);
+}
+
+.directors-gallery__list {
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.directors-gallery__figure {
+  margin: 0;
+  border: 1px solid color-mix(in srgb, var(--bio-400) 32%, transparent);
+  padding: 0.75rem;
+  background: var(--night-950);
+}
+
+.directors-gallery__figure img {
+  object-fit: contain;
+}
+
+.directors-gallery__figure figcaption {
+  margin-top: 0.75rem;
+  color: var(--sprite-100);
+  font-family: var(--font-jetbrains-mono), Consolas, monospace;
+  font-size: 0.75rem;
+}
+
 .org-detail {
   width: min(100%, 48rem);
   margin-inline: auto;
@@ -1522,5 +1688,224 @@ button:focus-visible {
     transform: none !important;
     filter: none !important;
     visibility: visible !important;
+  }
+
+  .org-node__link:hover,
+  .org-node__link:focus-visible {
+    transform: none;
+    filter: none;
+    animation: none;
+  }
+
+  .org-node__link:hover .org-mark,
+  .org-node__link:focus-visible .org-mark {
+    box-shadow:
+      0 0 0 2px var(--bio-400),
+      0 0 1.4rem color-mix(in srgb, var(--bio-400) 55%, transparent);
+  }
+}
+
+/* ============================================================
+   Organizations — orbital "solar system" directory
+   SCC at the centre; the four grove orgs orbit as logo planets.
+   ============================================================ */
+.solar-system {
+  position: relative;
+  width: min(100%, 42rem);
+  aspect-ratio: 1;
+  margin: clamp(2rem, 6vw, 5rem) auto clamp(4rem, 10vw, 8rem);
+}
+
+.solar-system__field {
+  position: absolute;
+  z-index: -1;
+  inset: -12%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--navi-600) 30%, transparent),
+    transparent 68%
+  );
+}
+
+.solar-system__sun {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.orbit-wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px dashed color-mix(in srgb, var(--bio-400) 20%, transparent);
+  border-radius: 50%;
+}
+
+.orbit-wrap--1 {
+  width: 44%;
+  height: 44%;
+}
+.orbit-wrap--2 {
+  width: 63%;
+  height: 63%;
+}
+.orbit-wrap--3 {
+  width: 81%;
+  height: 81%;
+}
+.orbit-wrap--4 {
+  width: 98%;
+  height: 98%;
+}
+
+.orbit {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  transform: rotate(var(--start, 0deg));
+  animation: orbit-spin var(--dur, 60s) linear var(--delay, 0s) infinite;
+}
+
+.orbit-wrap--1 .orbit {
+  --start: 18deg;
+  --dur: 48s;
+  --delay: -6s;
+}
+.orbit-wrap--2 .orbit {
+  --start: 140deg;
+  --dur: 66s;
+  --delay: -30s;
+}
+.orbit-wrap--3 .orbit {
+  --start: 255deg;
+  --dur: 84s;
+  --delay: -58s;
+}
+.orbit-wrap--4 .orbit {
+  --start: 330deg;
+  --dur: 104s;
+  --delay: -88s;
+}
+
+.planet {
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translate(-50%, -50%);
+}
+
+/* The large orbit rings must not intercept clicks aimed at inner planets;
+   only the planet logos and the central sun are interactive. */
+.orbit-wrap,
+.orbit,
+.planet {
+  pointer-events: none;
+}
+
+.planet__body,
+.solar-system__sun {
+  pointer-events: auto;
+}
+
+/* Counter-rotate so each logo stays upright while it orbits. */
+.planet__body {
+  transform: rotate(calc(-1 * var(--start, 0deg)));
+  animation: orbit-spin-rev var(--dur, 60s) linear var(--delay, 0s) infinite;
+}
+
+@keyframes orbit-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes orbit-spin-rev {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+/* Pause the whole system while a visitor is reading / navigating it. */
+.solar-system:hover .orbit,
+.solar-system:hover .planet__body,
+.solar-system:focus-within .orbit,
+.solar-system:focus-within .planet__body {
+  animation-play-state: paused;
+}
+
+/* Logo planets: circular badges, image fills the disc (no letterbox bars). */
+.solar-system .org-mark--photo {
+  overflow: hidden;
+  padding: 0;
+  border-radius: 50%;
+  border-color: color-mix(in srgb, var(--bio-400) 42%, transparent);
+  background: var(--night-950);
+}
+
+.solar-system .org-mark--photo .org-mark__logo {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  object-fit: cover;
+}
+
+.solar-system__sun .org-mark {
+  width: 8rem;
+  height: 8rem;
+  box-shadow:
+    0 0 2.5rem color-mix(in srgb, var(--campus-gold) 30%, transparent),
+    0 0 1.4rem color-mix(in srgb, var(--bio-400) 30%, transparent);
+}
+
+.solar-system .planet__body .org-mark {
+  width: 4.75rem;
+  height: 4.75rem;
+}
+
+@media (max-width: 700px) {
+  .solar-system {
+    width: min(100%, 30rem);
+  }
+  .solar-system__sun .org-mark {
+    width: 5.75rem;
+    height: 5.75rem;
+  }
+  .solar-system .planet__body .org-mark {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+  .solar-system .org-node__abbr {
+    font-size: 0.72rem;
+  }
+}
+
+/* Wide SADU banner logo — show at natural aspect, never letterboxed. */
+.sadu-logo {
+  display: block;
+  width: 100%;
+  max-width: 30rem;
+  height: auto;
+  margin-bottom: 1.5rem;
+  border-radius: 0.6rem;
+  border: 1px solid color-mix(in srgb, var(--campus-gold) 32%, transparent);
+  object-fit: contain;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Hold the planets in their spread starting angles, no spin. */
+  .orbit,
+  .planet__body {
+    animation: none;
   }
 }

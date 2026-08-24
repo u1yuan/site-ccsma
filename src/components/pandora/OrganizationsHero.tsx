@@ -4,9 +4,9 @@ import { HeroFrame } from "./HeroFrame";
 export function OrganizationsHero() {
   return (
     <HeroFrame
-      eyebrow="Connected groves / organization directory"
+      eyebrow="Recognized Student Organizations"
       title="Organizations"
-      intro="Five named student bodies form this map of connected groves. Each entry carries a community description compiled from public sources, not official FEU copy."
+      intro="Four academic organizations orbit the Student Coordinating Council at the centre. Select an organization to open its profile, compiled from public sources."
       visual={<GlowTree variant="groves" />}
     />
   );

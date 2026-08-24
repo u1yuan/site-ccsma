@@ -57,6 +57,30 @@ describe("reduced-motion fallbacks", () => {
     expect(container.querySelector("canvas")).not.toBeInTheDocument();
   });
 
+  it("reveals the same photo panel on hover and focus", () => {
+    const { container } = render(
+      <MediaReveal title="ACM activity photos" items={[]} previewOnHover>
+        Node
+      </MediaReveal>,
+    );
+
+    fireEvent.mouseEnter(container.querySelector(".media-reveal")!);
+    expect(
+      screen.getByRole("dialog", { name: "ACM activity photos" }),
+    ).toBeVisible();
+    expect(screen.getByText("Photos coming soon")).toBeVisible();
+
+    fireEvent.mouseLeave(container.querySelector(".media-reveal")!);
+    expect(
+      screen.queryByRole("dialog", { name: "ACM activity photos" }),
+    ).not.toBeInTheDocument();
+
+    fireEvent.focus(screen.getByRole("button", { name: "Node" }));
+    expect(
+      screen.getByRole("dialog", { name: "ACM activity photos" }),
+    ).toBeVisible();
+  });
+
   it("keeps MediaReveal content present under reduced motion", () => {
     render(
       <MediaReveal title="Visible reveal" items={[]}>
