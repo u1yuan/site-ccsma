@@ -31,7 +31,12 @@ export function ProgramSection({
               <p className="utility-label">2-in-1 specializations</p>
               <ul className="program-specializations__list">
                 {program.specializations.map((track) => (
-                  <li key={track}>{track}</li>
+                  <li key={track.label}>
+                    <a href={track.url} target="_blank" rel="noreferrer">
+                      {track.label}
+                      <span className="sr-only"> (opens in a new tab)</span>
+                    </a>
+                  </li>
                 ))}
               </ul>
             </div>

@@ -7,7 +7,8 @@ import { useEffect, useState } from "react";
 import { usePrefersReducedMotion } from "@/src/lib/motion/usePrefersReducedMotion";
 
 const links = [
-  { href: "/", label: "Programs" },
+  { href: "/", label: "Home" },
+  { href: "/programs/", label: "Programs" },
   { href: "/organizations/", label: "Organizations" },
   { href: "/student-activities/", label: "Student Activities" },
 ];

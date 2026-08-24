@@ -578,14 +578,26 @@ button:focus-visible {
   list-style: none;
 }
 
-.program-specializations__list li {
+.program-specializations__list a {
+  display: inline-flex;
+  align-items: center;
   border: 1px solid color-mix(in srgb, var(--bio-400) 45%, transparent);
   border-radius: 999px;
   padding: 0.35rem 0.9rem;
   color: var(--sprite-100);
   font-family: var(--font-jetbrains-mono), Consolas, monospace;
   font-size: 0.78rem;
+  text-decoration: none;
   background: color-mix(in srgb, var(--bio-400) 8%, transparent);
+  transition:
+    background 180ms ease,
+    border-color 180ms ease;
+}
+
+.program-specializations__list a:hover,
+.program-specializations__list a:focus-visible {
+  border-color: var(--bio-400);
+  background: color-mix(in srgb, var(--bio-400) 18%, transparent);
 }
 
 .program-section__flora {
@@ -1931,4 +1943,95 @@ button:focus-visible {
   .planet__body {
     animation: none;
   }
+}
+
+/* ============================================================
+   Home — CCSMA welcome hub (freshie-facing landing)
+   ============================================================ */
+.hub {
+  width: min(100%, var(--content-width));
+  margin-inline: auto;
+  padding: 3rem var(--page-gutter) 7rem;
+}
+
+.hub__cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hub-card {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  gap: 0.55rem;
+  border: 1px solid color-mix(in srgb, var(--navi-600) 70%, transparent);
+  border-radius: 1rem;
+  padding: 1.75rem;
+  color: inherit;
+  text-decoration: none;
+  background: color-mix(in srgb, var(--night-900) 70%, transparent);
+  transition:
+    transform 200ms ease,
+    border-color 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.hub-card:hover,
+.hub-card:focus-visible {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--bio-400) 55%, transparent);
+  box-shadow: 0 0 2rem color-mix(in srgb, var(--bio-400) 14%, transparent);
+}
+
+.hub-card h2 {
+  font-family: var(--font-poppins), Arial, sans-serif;
+  font-size: clamp(1.3rem, 2.4vw, 1.8rem);
+  line-height: 1.12;
+}
+
+.hub-card__blurb {
+  flex: 1;
+  color: color-mix(in srgb, var(--ink-100) 74%, transparent);
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+.hub-card__cta {
+  margin-top: 0.4rem;
+  color: var(--bio-400);
+  font-family: var(--font-jetbrains-mono), Consolas, monospace;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+}
+
+.freshie {
+  margin-top: 3.5rem;
+  border-top: 1px solid color-mix(in srgb, var(--navi-600) 55%, transparent);
+  padding-top: 2rem;
+}
+
+.freshie__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: 1.5rem;
+  margin: 1.25rem 0 0;
+}
+
+.freshie__item dt {
+  color: var(--sprite-100);
+  font-family: var(--font-jetbrains-mono), Consolas, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.freshie__item dd {
+  margin: 0.5rem 0 0;
+  color: color-mix(in srgb, var(--ink-100) 78%, transparent);
+  font-size: 0.98rem;
+  line-height: 1.55;
 }

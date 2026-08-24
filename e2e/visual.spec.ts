@@ -1,7 +1,8 @@
 import { expect, test } from "@playwright/test";
 
 const visualRoutes = [
-  { path: "/", name: "programs" },
+  { path: "/", name: "home" },
+  { path: "/programs/", name: "programs" },
   { path: "/organizations/", name: "organizations" },
   { path: "/student-activities/", name: "student-activities" },
 ];

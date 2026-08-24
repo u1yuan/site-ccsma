@@ -4,6 +4,15 @@ import { expect, test } from "@playwright/test";
 const routes = [
   {
     path: "/",
+    heading: "Welcome to CCSMA",
+    sections: [
+      "Explore the programs",
+      "Meet your organizations",
+      "Get involved with SADU",
+    ],
+  },
+  {
+    path: "/programs/",
     heading: "Programs that grow futures",
     sections: [
       "Bachelor of Science in Computer Science",
@@ -150,9 +159,7 @@ test("organization descriptions and SADU details remain exact", async ({
       name: "Student Activities and Development Unit logo",
     }),
   ).toBeVisible();
-  await expect(
-    page.getByRole("img", { name: "SADO Senior Directors and Directors" }),
-  ).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Directors" })).toBeVisible();
   await expect(page.getByText("Room 1501", { exact: true })).toBeVisible();
   await expect(
     page.getByText("Office Hours: Monday to Friday, 8:00 a.m. – 5:00 p.m.", {
@@ -251,7 +258,7 @@ test.describe("reduced motion", () => {
     await expect(page.locator('[data-canvas-state="static"]')).toBeVisible();
     await expect(page.locator('[data-motion-state="animated"]')).toHaveCount(0);
     await expect(
-      page.getByRole("heading", { name: "Bachelor of Multimedia Arts" }),
+      page.getByRole("heading", { name: "Meet your organizations" }),
     ).toBeAttached();
 
     const hiddenMotionContent = await page

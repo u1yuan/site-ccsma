@@ -117,17 +117,10 @@ describe("typed content modules", () => {
     expect(
       Object.values(programIllustrations).every((items) => items.length === 0),
     ).toBe(true);
-    expect(
-      Object.entries(directors)
-        .filter(([group]) => group !== "sadu")
-        .every(([, items]) => items.length === 0),
-    ).toBe(true);
-    expect(directors.sadu).toEqual([
-      {
-        src: "/directors/sadu/directors.png",
-        alt: "SADO Senior Directors and Directors",
-      },
-    ]);
+    // Director photos are placeholders until the human adds per-person files.
+    expect(Object.values(directors).every((items) => items.length === 0)).toBe(
+      true,
+    );
     expect(accreditations.map((mark) => mark.label)).toEqual([
       "PAASCU",
       "PICAB",

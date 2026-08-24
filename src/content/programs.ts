@@ -7,8 +7,8 @@ export interface Program {
   description: string;
   status: Extract<ContentStatus, "official">;
   flora: "crystal" | "mushroom" | "blossom" | "fern" | "berries" | "petals";
-  // Optional "2-in-1" specialization tracks offered within the degree.
-  specializations?: string[];
+  // Optional "2-in-1" specialization tracks, each linking to its official page.
+  specializations?: { label: string; url: string }[];
 }
 
 export const programsSource: SourceAttribution = {
@@ -26,9 +26,18 @@ export const programs: Program[] = [
     status: "official",
     flora: "crystal",
     specializations: [
-      "Data Science",
-      "Artificial Intelligence",
-      "Software Engineering",
+      {
+        label: "Data Science",
+        url: "https://www.feutech.edu.ph/feutech/academics/bscsds",
+      },
+      {
+        label: "Artificial Intelligence",
+        url: "https://www.feutech.edu.ph/feutech/academics/bscs",
+      },
+      {
+        label: "Software Engineering",
+        url: "https://www.feutech.edu.ph/feutech/academics/bscsse",
+      },
     ],
   },
   {
